@@ -159,11 +159,15 @@ function tim() {
     top: 0,
     behavior: 'smooth'
   })
-  var gtt = ip.value.toLowerCase()
   var tong = document.querySelectorAll('#mh button')
   for (var x of tong) {
     var tp = x.textContent.toLocaleLowerCase()
     var ipp = ip.value.toLocaleLowerCase()
+    
+    if (!ipp.includes("'")) {
+      tp = tp.replace("'", "")
+    }
+    
     if (tp.includes(ipp)) {
       x.style.display= 'inline-block'
     }
