@@ -76,11 +76,11 @@ for (var i = hero; i < hero + 26; i++) {
       if (mode2) {
         tag.style.width = "45px"
         tag.style.top = "15%"
-        tag.style.left = "5%"
+        tag.style.right = "5%"
       } else {
         tag.style.width = "80px"
         tag.style.top = "10%"
-        tag.style.left = "5%"
+        tag.style.right = "5%"
       }
       w.appendChild(tag)
     }
