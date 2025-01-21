@@ -33,15 +33,20 @@ for (var i = hero; i < hero + 26; i++) {
   
   var w = document.createElement("div")
   var a = document.createElement("img")
+  var tag = document.createElement('img')
   var f = document.createElement("p")
+  a.classList.add('img')
   f.textContent = String(i)
   w.appendChild(a)
   if (mode2) w.style.maxWidth = "50%";
   else w.style.maxWidth = "100%";
   w.style.textAlign = "center"
+  w.style.position = "relative"
   d.appendChild(w)
   a.setAttribute("src", "https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/" + new_id +".jpg")
   a.setAttribute("id", new_id)
+  
+  tag.setAttribute('src', `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${new_id}.png`)
   
   var v = false
   if (bl && String(i).substring(3,5) == "00") {
@@ -54,7 +59,7 @@ for (var i = hero; i < hero + 26; i++) {
     a.setAttribute("src", g.src)
   }
   
-  function kt(a, f, w){
+  function kt(a, f, w, tag){
     a.onerror = function() {
       if (!mode) {
         a.remove()
@@ -64,9 +69,26 @@ for (var i = hero; i < hero + 26; i++) {
         a.src = "None.jpg"
       }
     }
+    
+    tag.onload = function() {
+      tag.style.position = "absolute"
+      
+      if (mode2) {
+        tag.style.width = "45px"
+        tag.style.top = "15%"
+        tag.style.left = "5%"
+      } else {
+        tag.style.width = "80px"
+        tag.style.top = "10%"
+        tag.style.left = "5%"
+      }
+      w.appendChild(tag)
+    }
+
     a.onload = function() {
       if (mode1) w.appendChild(f);
       a.style.border = "1px solid #fff"
+      
       w.onclick = function () {
         var K = a.src
         var K1 = K.indexOf('6')+2
@@ -76,7 +98,7 @@ for (var i = hero; i < hero + 26; i++) {
       }
     }
   }
-  kt(a, f, w)
+  kt(a, f, w, tag)
 }
 
 function backk() {
