@@ -188,22 +188,6 @@ audio {
   z-index: 5;
 }
 
-#ktskin {
-  width: 100%;
-  font-size: 16px;
-  border: 2px solid black;
-  border-radius: 5px;
-  background: white;
-  font-weight: 700;
-  transition: 0.1s;
-}
-
-#ktskin:active {
-  background: #131313;
-  color: white;
-  transform: scale(0.93);
-}
-
 #mhtb {
   background: gray;
   border-radius: 5px;
