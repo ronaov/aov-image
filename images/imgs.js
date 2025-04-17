@@ -31,6 +31,18 @@ var hero = parseInt(id + "00")
 for (var i = hero; i < hero + 26; i++) {
   var new_id = String(i)
   
+  if (new_id == "11620") {
+    new_id = "11620_2"
+  }
+  
+  if (new_id == "13311") {
+    new_id = "13311_2"
+  }
+  
+  if (new_id == "16707") {
+    new_id = "16707_2"
+  }
+  
   var w = document.createElement("div")
   var a = document.createElement("img")
   var tag = document.createElement('img')
