@@ -43,6 +43,8 @@ for (var i = hero; i < hero + 26; i++) {
     new_id = "16707_2"
   }
   
+  //pass
+  
   var w = document.createElement("div")
   var a = document.createElement("img")
   var tag = document.createElement('img')
