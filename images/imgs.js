@@ -1,127 +1,160 @@
-const urlp = new URLSearchParams(window.location.search)
-var id = urlp.get('id')
-var mode = localStorage.getItem('mode')
-var mode1 = localStorage.getItem('mode1')
-var mode2 = localStorage.getItem('mode2')
-mode = mode == "true"
-mode1 = mode1 == "true"
-mode2 = mode2 == "true"
+// Lấy ID từ URL, các chế độ từ localStorage
+const urlParams = new URLSearchParams(window.location.search)
+const heroId = urlParams.get('id')
 
-var tittle = document.getElementById("tittle")
-tittle.textContent = id
+let mode = localStorage.getItem('mode') === "true"
+let mode1 = localStorage.getItem('mode1') === "true"
+let mode2 = localStorage.getItem('mode2') === "true"
 
-var fg = ["10600_B36", "10700_B36", "10800_B40", "10900_B36", "15300_B42", "15600_B36", "16600_B36", "17400_B42", "18400_B37", "19000_B41", "50100_B36", "51400_B36"]
-var ide = id + "00"
-var bl = false
+// Hiển thị ID làm tiêu đề
+const titleElement = document.getElementById("tittle")
+titleElement.textContent = heroId
 
-var num = 0
-for (var t of fg) {
-  if (t.includes(ide)) {
-    var bl = true
-    break
-  }
-  num++
+// Danh sách tướng đặc biệt có ảnh thay thế
+const specialHeroList = [
+	"10600_B36", "10700_B36", "10800_B40", "10900_B36",
+	"15300_B42", "15600_B36", "16600_B36", "17400_B42",
+	"18400_B37", "19000_B41", "50100_B36", "51400_B36"
+]
+const fullHeroId = heroId + "00"
+let isSpecialHero = false
+let specialIndex = 0
+
+// Kiểm tra ID có nằm trong danh sách đặc biệt
+for (let i = 0; i < specialHeroList.length; i++) {
+	if (specialHeroList[i].includes(fullHeroId)) {
+		isSpecialHero = true
+		specialIndex = i
+		break
+	}
 }
 
-var g = new Image()
-g.src = "https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/" + fg[num] +".jpg"
+// Ảnh thay thế nếu là hero đặc biệt
+const specialImage = new Image()
+specialImage.src = "https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/" + specialHeroList[specialIndex] + ".jpg"
 
-var d = document.getElementById("img")
-var hero = parseInt(id + "00")
-for (var i = hero; i < hero + 26; i++) {
-  var new_id = String(i)
-  
-  if (new_id == "11620") {
-    new_id = "11620_2"
-  }
-  
-  if (new_id == "13311") {
-    new_id = "13311_2"
-  }
-  
-  if (new_id == "16707") {
-    new_id = "16707_2"
-  }
-  
-  //pass
-  
-  var w = document.createElement("div")
-  var a = document.createElement("img")
-  var tag = document.createElement('img')
-  var f = document.createElement("p")
-  a.classList.add('img')
-  f.textContent = String(i)
-  w.appendChild(a)
-  if (mode2) w.style.maxWidth = "50%";
-  else w.style.maxWidth = "100%";
-  w.style.textAlign = "center"
-  w.style.position = "relative"
-  d.appendChild(w)
-  a.setAttribute("src", "https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/" + new_id +".jpg")
-  a.setAttribute("id", new_id)
-  
-  tag.setAttribute('src', `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${new_id}.png`)
-  for (let i=1; i<=2; i++) {
-    const new_tag = new Image()
-    new_tag.src = `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${new_id}_${i}.png`
-    new_tag.onload = function() {
-      tag.setAttribute("src", new_tag.src)
-    }
-  }
-  
-  var v = false
-  if (bl && String(i).substring(3,5) == "00") {
-    (g.onload = function () {
-      v = true
-    })(g, a)
-  }
-  
-  if (v) {
-    a.setAttribute("src", g.src)
-  }
-  
-  function kt(a, f, w, tag){
-    a.onerror = function() {
-      if (!mode) {
-        a.remove()
-        if (mode1) f.remove();
-      }
-      if (mode) {
-        a.src = "None.jpg"
-      }
-    }
-    
-    tag.onload = function() {
-      tag.style.position = "absolute"
-      
-      if (mode2) {
-        tag.style.width = "45px"
-        tag.style.top = "15%"
-        tag.style.right = "5%"
-      } else {
-        tag.style.width = "80px"
-        tag.style.top = "10%"
-        tag.style.right = "5%"
-      }
-      w.appendChild(tag)
-    }
+// Container chính
+const mainContainer = document.getElementById("img")
 
-    a.onload = function() {
-      if (mode1) w.appendChild(f);
-      a.style.border = "1px solid #fff"
-      
-      w.onclick = function () {
-        var K = a.src
-        var K1 = K.indexOf('6')+2
-        var K2 = K.indexOf('.jpg')
-        var idskin = K.substring(K1, K2)
-        window.location.href = 'view-img/?id=' + encodeURIComponent(idskin)
-      }
-    }
-  }
-  kt(a, f, w, tag)
+// Hàm tạo URL ảnh chính
+function getHeroImageUrl(id) {
+	return `https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/${id}.jpg`
 }
 
+// Hàm tạo URL label mặc định
+function getHeroLabelUrl(id) {
+	return `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${id}.png`
+}
+
+// Hàm kiểm tra label phụ (_1, _2)
+function tryAlternateLabels(labelImg, id) {
+	let updated = false
+	for (let i = 1; i <= 2; i++) {
+		const testImg = new Image()
+		testImg.src = `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${id}_${i}.png`
+		testImg.onload = () => {
+			if (!updated) {
+				labelImg.setAttribute("src", testImg.src)
+				updated = true
+			}
+		}
+	}
+}
+
+// Hàm xử lý sự kiện cho từng ảnh
+function setupImageEvents(imageEl, idText, container, labelImg) {
+	imageEl.onerror = () => {
+		if (mode) {
+			imageEl.src = "None.jpg"
+		} else {
+			imageEl.remove()
+			if (mode1) idText.remove()
+		}
+	}
+	
+	// Đăng ký trước onload cho labelImg
+	labelImg.onload = () => {
+		labelImg.style.position = "absolute"
+		labelImg.style.width = mode2 ? "45px" : "80px"
+		labelImg.style.top = mode2 ? "15%" : "10%"
+		labelImg.style.right = "5%"
+		// Chỉ thêm tag khi ảnh chính đã load (container đã có mainImage)
+		if (container.contains(imageEl)) {
+			container.appendChild(labelImg)
+		}
+	}
+	
+	imageEl.onload = () => {
+		imageEl.style.border = "1px solid #fff"
+		
+		// Chỉ append idText khi ảnh chính load thành công
+		if (mode1) container.appendChild(idText)
+		
+		container.onclick = () => {
+			const src = imageEl.src
+			const start = src.indexOf('6') + 2
+			const end = src.indexOf('.jpg')
+			const idskin = src.substring(start, end)
+			window.location.href = 'view-img/?id=' + encodeURIComponent(idskin)
+		}
+	}
+}
+
+// Tạo 26 ảnh tướng theo id
+const baseHeroId = parseInt(heroId + "00")
+for (let i = baseHeroId; i < baseHeroId + 26; i++) {
+	let newHeroId = String(i)
+	
+	// Những ID cần xử lý đặc biệt
+	if (newHeroId === "11620") newHeroId = "11620_2"
+	if (newHeroId === "13311") newHeroId = "13311_2"
+	if (newHeroId === "16707") newHeroId = "16707_2"
+	
+	// Tạo phần tử DOM
+	const container = document.createElement("div")
+	const mainImage = document.createElement("img")
+	const labelImage = document.createElement("img")
+	const idLabel = document.createElement("p")
+	
+	// Thiết lập style cho container
+	container.style.textAlign = "center"
+	container.style.position = "relative"
+	container.style.maxWidth = mode2 ? "50%" : "100%"
+	
+	mainImage.classList.add("img")
+	mainImage.setAttribute("id", newHeroId)
+	mainImage.setAttribute("src", getHeroImageUrl(newHeroId))
+	
+	idLabel.textContent = String(i)
+	
+	container.appendChild(mainImage)
+	mainContainer.appendChild(container)
+	
+	// Set labelImage src SAU khi đăng ký onload
+	try {
+		labelImage.onload = null // reset để chắc chắn
+	} catch {}
+	
+	labelImage.onload = null // reset if needed
+	// gán src sau khi đã đăng ký onload (ở setupImageEvents)
+	labelImage.setAttribute("src", getHeroLabelUrl(newHeroId))
+	
+	// Kiểm tra ảnh label phụ (nếu có)
+	tryAlternateLabels(labelImage, newHeroId)
+	
+	// Nếu là tướng đặc biệt, thay ảnh chính khi tải xong
+	if (isSpecialHero && String(i).substring(3, 5) === "00") {
+		const altImage = new Image()
+		altImage.src = specialImage.src
+		altImage.onload = () => {
+			mainImage.setAttribute("src", altImage.src)
+		}
+	}
+	
+	setupImageEvents(mainImage, idLabel, container, labelImage)
+}
+
+// Nút quay lại
 function backk() {
-  window.history.back()
+	window.history.back()
 }
