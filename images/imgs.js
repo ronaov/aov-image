@@ -61,6 +61,13 @@ for (var i = hero; i < hero + 26; i++) {
   a.setAttribute("id", new_id)
   
   tag.setAttribute('src', `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${new_id}.png`)
+  for (var i=0; i<=5; i++) {
+    const new_tag = new Image()
+    new_tag.src = `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${new_id}_${i}.png`
+    new_tag.onload = function() {
+      tag.setAttribute("src", `https://dl.ops.kgvn.garenanow.com/hok/SkinLabel/${new_id}_${i}.png`)
+    }
+  }
   
   var v = false
   if (bl && String(i).substring(3,5) == "00") {
