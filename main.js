@@ -156,6 +156,7 @@ var ids = [
   "563: Heino",
   "567: Erin",
   "568: Ming",
+  "595: Edras",
   "596: Goverra",
   "597: Biron",
   "598: Bolt Baron",
