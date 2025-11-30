@@ -3,7 +3,7 @@ var id = s.get('id')
 var link
 
 if (id === "None") {
-	link = "/images/view-img/None.jpg"
+	link = "None.jpg"
 } else if (id === "warning") {
 	link = "warning.jpg"
 } else {
