@@ -40,7 +40,7 @@ const mainContainer = document.getElementById("img")
 // Hàm tạo URL ảnh chính
 function getHeroImageUrl(id) {
 	if (["52809", "14412"].includes(id)) {
-		return "warning.png"
+		return "view-img/warning.jpg"
 	} else {
 		return `https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/${id}.jpg`
 	}
@@ -70,7 +70,7 @@ function tryAlternateLabels(labelImg, id) {
 function setupImageEvents(imageEl, idText, container, labelImg) {
 	imageEl.onerror = () => {
 		if (mode) {
-			imageEl.src = "None.jpg"
+			imageEl.src = "view-img/None.jpg"
 		} else {
 			imageEl.remove()
 			if (mode1) idText.remove()
@@ -97,7 +97,7 @@ function setupImageEvents(imageEl, idText, container, labelImg) {
 		
 		container.onclick = () => {
 			const src = imageEl.src
-			const start = src.indexOf('6') + 2
+			const start = src.lastIndexOf("/") + 1
 			const end = src.indexOf('.jpg')
 			const idskin = src.substring(start, end)
 			window.location.href = 'view-img/?id=' + encodeURIComponent(idskin)
