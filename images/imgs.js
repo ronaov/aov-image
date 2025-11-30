@@ -39,7 +39,11 @@ const mainContainer = document.getElementById("img")
 
 // Hàm tạo URL ảnh chính
 function getHeroImageUrl(id) {
-	return `https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/${id}.jpg`
+	if (["52809", "14412"].includes(id)) {
+		return "warning.png"
+	} else {
+		return `https://dl.ops.kgtw.garenanow.com/CHT/HeroTrainingLoadingNew_B36/${id}.jpg`
+	}
 }
 
 // Hàm tạo URL label mặc định
