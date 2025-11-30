@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="icon" href="images/view-img/aov-image-logo.png" sizes="32x32">
+  
+  <title>AOV image - Ron AOV</title>
+</head>
+
+<body>
+  
+  <div id="top">
+    <i id="menuu" class='bx bx-menu' onclick="btnst()"></i>
+    <i id="fd" class='bx bx-search' onclick="timkiem()"></i>
+    AOV image - Ron AOV
+  </div>
+  <div id="tk">
+    <input id="input" oninput="tim()" type="text" placeholder="Tìm kiếm..." />
+  </div>
+  <div id="mh"></div>
+  <div id="mhtb">Mẹo: tính năng chỉ hoạt động khi bạn đã từng sử dụng nút này. Kể từ phiên bản sau, bạn có thể check skin bằng tính năng này!<br><span id="span1">Thông báo sẽ tự tắt khi hoàn thành quá trình ghi nhớ skin hiện tại</span><br><span id="span2">0%</span></div>
+  <div id="setting">
+    <h2>Tùy chỉnh</h2>
+    <i id="ii" class='bx bxs-x-circle' onclick="closee()"></i>
+    
+    <div id="ci">
+      <div class="i1">
+        <i class='bx bxs-info-circle' id="i"></i>
+        <h6>Tùy chỉnh không ảnh hướng chất lượng ảnh</h6>
+      </div>
+      <div class="i1" onclick="kenh()">
+        <i class='bx bxl-youtube' id="i"></i>
+        <h6>Ron AOV</h6>
+      </div>
+    </div>
+    
+    <div class="phim">
+      <div class="btn" id="btn" onclick="nhan()">
+        <div class="on" id="on"></div>
+      </div>
+      <p id="txt">Ẩn skin không có</p>
+    </div>
+    
+    <div class="phim">
+      <div class="btn" id="btn1" onclick="nhan1()">
+        <div class="on" id="on1"></div>
+      </div>
+      <p id="txt1">Ẩn mã số skin</p>
+    </div>
+    
+    <div class="phim">
+      <div class="btn" id="btn2" onclick="nhan2()">
+        <div class="on" id="on2"></div>
+      </div>
+      <p id="txt2">Một cột ảnh</p>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

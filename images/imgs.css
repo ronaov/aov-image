@@ -1,0 +1,55 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: "Baloo Paaji 2", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: #131313;
+}
+
+#top {
+  text-align: center;
+  font-size: 25px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 700;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+.img {
+  width: 90%;
+  margin-top: 20px;
+  border-radius: 0;
+  box-shadow: 0 0 6px #fff;
+  border-radius: 6px;
+  position: relative;
+  
+}
+
+#img {
+  margin-top: 10%;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+p {
+  color: white;
+}
+
+i {
+  font-size: 30px;
+  position: absolute;
+  top: 16%;
+  left: 10px;
+}
+
+i:active {
+  color: red;
+}
